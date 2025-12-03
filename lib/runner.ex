@@ -17,14 +17,17 @@ defmodule Aoc.Runner do
   def run(day, part, input \\ nil)
 
   def run(day, part, nil) when part in [1, 2] do
-    input = Day.read_in(day)
-    run(day, part, input)
+    stream = Day.stream_in(day)
+
+    run(day, part, stream)
   end
 
-  def run(day, part, input) when part in [1, 2] and is_binary(input) do
+  def run(day, part, input) when part in [1, 2] do
     module = part_module(day, part)
 
-    apply(module, :run, [input])
+    :timer.tc(fn ->
+      apply(module, :run, [input])
+    end)
   end
 
   defp part_module(day, part) do

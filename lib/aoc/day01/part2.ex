@@ -1,8 +1,6 @@
 defmodule Aoc.Day01.Part2 do
-  def run(input) do
-    input
-    |> String.trim()
-    |> String.split("\n", trim: true)
+  def run(stream) do
+    stream
     |> Enum.map(&parse/1)
     |> Enum.flat_map(&flatten(&1, []))
     |> Enum.reduce({50, 0}, &dial/2)

@@ -1,7 +1,7 @@
 defmodule Aoc.Day02.Part1 do
-  def run(input) do
-    input
-    |> String.trim()
+  def run(stream) do
+    stream
+    |> Enum.join()
     |> String.split(",", trim: true)
     |> Enum.map(&to_range/1)
     |> Enum.flat_map(&extract_invalid/1)

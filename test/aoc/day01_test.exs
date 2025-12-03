@@ -1,6 +1,7 @@
 defmodule Aoc.Day01Test do
   use ExUnit.Case, async: true
 
+  import Aoc.TestHelper
   alias Aoc.Runner
 
   @moduletag :day01
@@ -20,12 +21,16 @@ defmodule Aoc.Day01Test do
 
   @tag :day01_part1
   test "part1" do
-    assert Runner.run(1, 1, @example_input) == 3
+    {_, actual} = Runner.run(1, 1, stream_in(@example_input))
+
+    assert actual == 3
   end
 
   @tag :day01_part2
   test "part2 " do
-    assert Runner.run(1, 2, @example_input) == 6
+    {_, actual} = Runner.run(1, 2, stream_in(@example_input))
+
+    assert actual == 6
   end
 
   @tag :day01_part2
@@ -44,7 +49,9 @@ defmodule Aoc.Day01Test do
     L182
     """
 
-    assert Runner.run(1, 2, input) == 13
+    {_, actual} = Runner.run(1, 2, stream_in(input))
+
+    assert actual == 13
   end
 
   @tag :day01_part2
@@ -54,6 +61,8 @@ defmodule Aoc.Day01Test do
     L100
     """
 
-    assert Runner.run(1, 2, input) == 2
+    {_, actual} = Runner.run(1, 2, stream_in(input))
+
+    assert actual == 2
   end
 end

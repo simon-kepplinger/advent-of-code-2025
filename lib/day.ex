@@ -16,10 +16,11 @@ defmodule Aoc.Day do
   @doc """
   Reads the raw puzzle input for `day` from `priv/in/dayXX`.
   """
-  def read_in(day) do
+  def stream_in(day) do
     day
     |> in_path()
-    |> File.read!()
+    |> File.stream!()
+    |> Stream.map(&String.trim/1)
   end
 
   def pad2(day) when is_integer(day),

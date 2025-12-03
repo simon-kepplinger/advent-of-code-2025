@@ -1,8 +1,7 @@
 defmodule Aoc.Day01.Part1 do
-  def run(input) do
-    input
-    |> String.trim()
-    |> String.split("\n", trim: true)
+  def run(stream) do
+    stream
+    |> Enum.to_list()
     |> Enum.map(&parse/1)
     |> Enum.scan(50, &rem(&1 + &2, 100))
     |> Enum.filter(&(&1 == 0))

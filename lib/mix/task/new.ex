@@ -38,20 +38,18 @@ defmodule Mix.Tasks.Aoc.New do
 
     part1_content = """
     defmodule #{base_module}.Part1 do
-      def run(input) do
-        input
-        |> String.trim() 
-        |> String.split("\\n", trim: true)
+      def run(stream) do
+        stream
+        |> Enum.to_list()
       end
     end
     """
 
     part2_content = """
     defmodule #{base_module}.Part2 do
-      def run(input) do
-        input
-        |> String.trim() 
-        |> String.split("\\n", trim: true) 
+      def run(stream) do
+        stream
+        |> Enum.to_list()
       end
     end
     """
@@ -73,6 +71,7 @@ defmodule Mix.Tasks.Aoc.New do
 
       @moduletag :day#{day2}
 
+      import Aoc.TestHelper
       alias Aoc.Runner
 
       @example_input \"\"\"
@@ -81,12 +80,16 @@ defmodule Mix.Tasks.Aoc.New do
 
       @tag :day#{day2}_part1
       test "part1" do
-        assert Runner.run(#{day_int}, 1, @example_input) == :todo_replace_me
+        {_, actual} = Runner.run(#{day_int}, 1, stream_in(@example_input)) 
+
+        assert actual == :todo_replace_me
       end
 
       @tag :day#{day2}_part2
       test "part2 " do
-        assert Runner.run(#{day_int}, 2, @example_input) == :todo_replace_me
+        {_, actual} = Runner.run(#{day_int}, 2, stream_in(@example_input)) 
+
+        assert actual == :todo_replace_me
       end
     end
     """

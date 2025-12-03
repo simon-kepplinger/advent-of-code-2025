@@ -3,6 +3,7 @@ defmodule Aoc.Day02Test do
 
   @moduletag :day02
 
+  import Aoc.TestHelper
   alias Aoc.Runner
 
   @example_input """
@@ -11,11 +12,15 @@ defmodule Aoc.Day02Test do
 
   @tag :day02_part1
   test "part1" do
-    assert Runner.run(2, 1, @example_input) == 1_227_775_554
+    {_, actual} = Runner.run(2, 1, stream_in(@example_input))
+
+    assert actual == 1_227_775_554
   end
 
   @tag :day02_part2
   test "part2 " do
-    assert Runner.run(2, 2, @example_input) == 4_174_379_265
+    {_, actual} = Runner.run(2, 2, stream_in(@example_input))
+
+    assert actual == 4_174_379_265
   end
 end
