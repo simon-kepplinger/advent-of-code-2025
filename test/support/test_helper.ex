@@ -2,6 +2,6 @@ defmodule Aoc.TestHelper do
   def stream_in(input \\ "") do
     input
     |> String.trim()
-    |> String.split("\n", trim: true)
+    |> String.split("\n")
   end
 end
