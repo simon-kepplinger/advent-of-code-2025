@@ -40,6 +40,20 @@ defmodule Aoc.Grid do
     %Grid{grid | cells: Map.put(grid.cells, point, val)}
   end
 
+  def get(%Grid{cells: cells}, %Point{} = point) do
+    {point, cells[point]}
+  end
+
+  def get(%Grid{} = grid, %Point{} = point, dir) do
+    Point.neighbour(point, dir)
+    |> then(&Grid.get(grid, &1))
+  end
+
+  def find(%Grid{cells: cells}, val) do
+    cells
+    |> Enum.find(fn {_, v} -> v == val end)
+  end
+
   def is_within(grid, %Point{x: x, y: y}) do
     %__MODULE__{height: height, width: width} = grid
 
@@ -47,5 +61,20 @@ defmodule Aoc.Grid do
       y >= 0 and
       x <= width and
       y <= height
+  end
+end
+
+defimpl String.Chars, for: Aoc.Grid do
+  def to_string(%Aoc.Grid{width: w, height: h, cells: cells}) do
+    0..(h - 1)
+    |> Enum.map(fn y ->
+      0..(w - 1)
+      |> Enum.map(fn x ->
+        # default "."
+        Map.get(cells, %Aoc.Point{x: x, y: y})
+      end)
+      |> Enum.join()
+    end)
+    |> Enum.join("\n")
   end
 end
