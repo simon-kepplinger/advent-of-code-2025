@@ -70,7 +70,6 @@ defimpl String.Chars, for: Aoc.Grid do
     |> Enum.map(fn y ->
       0..(w - 1)
       |> Enum.map(fn x ->
-        # default "."
         Map.get(cells, %Aoc.Point{x: x, y: y})
       end)
       |> Enum.join()
