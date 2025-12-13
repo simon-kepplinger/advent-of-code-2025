@@ -6,6 +6,19 @@ defmodule Aoc.Grid do
             height: 0,
             cells: %{}
 
+  def new(w, h),
+    do: %__MODULE__{
+      width: w,
+      height: h,
+      cells:
+        for(
+          x <- 0..(w - 1),
+          y <- 0..(h - 1),
+          into: %{},
+          do: {%Point{x: x, y: y}, "."}
+        )
+    }
+
   def new(stream) do
     stream
     |> Enum.with_index()
@@ -61,6 +74,15 @@ defmodule Aoc.Grid do
       y >= 0 and
       x <= width and
       y <= height
+  end
+
+  def print(list, width, height) do
+    list
+    |> Enum.reduce(
+      Grid.new(width, height),
+      &Grid.set(&2, {&1, "#"})
+    )
+    |> IO.puts()
   end
 end
 
